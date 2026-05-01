@@ -8,11 +8,10 @@ Proyecto 3 — Introducción a la Programación y Computación 2 | 1S 2026
 
 ## Tecnologías
 
-- .NET 9
+- .NET 10
 - ASP.NET Core Web API (Backend)
 - ASP.NET Core Razor Pages (Frontend)
 - Persistencia en archivos XML
-- Chart.js 4.4.0
 
 ---
 
@@ -28,7 +27,7 @@ ITGSA/
 
 ## Requisitos
 
-- .NET 9 SDK
+- .NET 10 SDK
 - Puertos 5000 y 5001 disponibles
 - Conexión a internet (Chart.js se carga desde CDN)
 
