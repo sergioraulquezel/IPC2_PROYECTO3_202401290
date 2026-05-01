@@ -64,49 +64,6 @@ dotnet run
 
 ---
 
-## Archivos de entrada
-
-**config.xml** — Registra clientes y bancos (incremental, actualiza si ya existe)
-```xml
-<config>
-  <clientes>
-    <cliente>
-      <NIT>399399K</NIT>
-      <nombre>Almacen Guatemalteco</nombre>
-    </cliente>
-  </clientes>
-  <bancos>
-    <banco>
-      <codigo>1</codigo>
-      <nombre>Banco Industrial</nombre>
-    </banco>
-  </bancos>
-</config>
-```
-
-**transac.xml** — Registra facturas y pagos (incremental, no permite actualizar)
-```xml
-<transacciones>
-  <facturas>
-    <factura>
-      <numeroFactura>F-001</numeroFactura>
-      <NITcliente>399399K</NITcliente>
-      <fecha>01/03/2026</fecha>
-      <valor>1500.00</valor>
-    </factura>
-  </facturas>
-  <pagos>
-    <pago>
-      <codigoBanco>1</codigoBanco>
-      <fecha>05/03/2026</fecha>
-      <NITcliente>399399K</NITcliente>
-      <valor>1500.00</valor>
-    </pago>
-  </pagos>
-</transacciones>
-```
-
----
 
 ## Lógica de pagos
 
@@ -131,5 +88,4 @@ pagos.xml
 
 ## Autor
 
-**Tu Nombre** — Carné: 000000000  
-Facultad de Ingeniería — Universidad de San Carlos de Guatemala
+Sergio Raul Quezel
