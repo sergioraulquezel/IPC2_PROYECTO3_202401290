@@ -1,0 +1,13 @@
+@page
+@model ErrorModel
+@{ ViewData["Title"] = "Error"; }
+
+<h1>Error</h1>
+<div class="alert alert-err">
+    Ocurrió un problema al procesar la solicitud.
+    @if (!string.IsNullOrEmpty(Model.RequestId))
+    {
+        <span> ID: @Model.RequestId</span>
+    }
+</div>
+<a href="/Configuracion" class="btn">Volver</a>

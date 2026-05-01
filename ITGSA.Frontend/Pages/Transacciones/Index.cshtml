@@ -1,0 +1,58 @@
+@page
+@model ITGSA.Frontend.Pages.Transacciones.IndexModel
+@{ ViewData["Title"] = "Transacciones"; }
+
+<h1>Cargar transacciones</h1>
+
+@if (!string.IsNullOrEmpty(Model.Error))
+{
+    <div class="alert alert-err">@Model.Error</div>
+}
+
+<div class="card">
+    <form method="post" enctype="multipart/form-data">
+        @Html.AntiForgeryToken()
+        <label>Archivo transac.xml</label>
+        <div class="file-wrap" style="margin-bottom:16px;">
+            <input type="file" name="archivo" accept=".xml" />
+            <div class="file-hint">Haz clic o arrastra el archivo aquí</div>
+            <div class="file-name"></div>
+        </div>
+        <button type="submit" class="btn-dark">Cargar</button>
+    </form>
+</div>
+
+@if (Model.Respuesta != null)
+{
+    <div class="result">
+        <div class="result-header">Resultado</div>
+        <div class="result-body">
+            <div class="stats">
+                <div class="stat ok">
+                    <div class="stat-val">@Model.Respuesta.NuevasFacturas</div>
+                    <div class="stat-lbl">Facturas nuevas</div>
+                </div>
+                <div class="stat warn">
+                    <div class="stat-val">@Model.Respuesta.FacturasDuplicadas</div>
+                    <div class="stat-lbl">Duplicadas</div>
+                </div>
+                <div class="stat err">
+                    <div class="stat-val">@Model.Respuesta.FacturasConError</div>
+                    <div class="stat-lbl">Con error</div>
+                </div>
+                <div class="stat ok">
+                    <div class="stat-val">@Model.Respuesta.NuevosPagos</div>
+                    <div class="stat-lbl">Pagos nuevos</div>
+                </div>
+                <div class="stat warn">
+                    <div class="stat-val">@Model.Respuesta.PagosDuplicados</div>
+                    <div class="stat-lbl">Duplicados</div>
+                </div>
+                <div class="stat err">
+                    <div class="stat-val">@Model.Respuesta.PagosConError</div>
+                    <div class="stat-lbl">Con error</div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

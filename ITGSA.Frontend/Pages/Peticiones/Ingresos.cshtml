@@ -1,0 +1,149 @@
+@page
+@model ITGSA.Frontend.Pages.Peticiones.IngresosModel
+@{ ViewData["Title"] = "Ingresos"; }
+
+<h1>Ingresos por banco</h1>
+
+<div class="card no-print">
+    <form method="get" style="display:flex; gap:10px; align-items:flex-end; flex-wrap:wrap;">
+        <div>
+            <label>Mes</label>
+            <select name="mes" style="width:140px;">
+                @for (int m = 1; m <= 12; m++)
+                {
+                    var lbl = new DateTime(2000, m, 1).ToString("MMMM",
+                        new System.Globalization.CultureInfo("es-GT"));
+                    if (m == Model.MesElegido)
+                    {
+                        <option value="@m" selected="selected">@lbl</option>
+                    }
+                    else
+                    {
+                        <option value="@m">@lbl</option>
+                    }
+                }
+            </select>
+        </div>
+        <div>
+            <label>Año</label>
+            <select name="anio" style="width:90px;">
+                @for (int a = DateTime.Now.Year; a >= DateTime.Now.Year - 3; a--)
+                {
+                    if (a == Model.AnioElegido)
+                    {
+                        <option value="@a" selected="selected">@a</option>
+                    }
+                    else
+                    {
+                        <option value="@a">@a</option>
+                    }
+                }
+            </select>
+        </div>
+        <button type="submit" class="btn-dark">Generar</button>
+        @if (Model.Resumen != null && Model.Resumen.Bancos.Count > 0)
+        {
+            <button type="button" class="btn" onclick="window.print()">Imprimir / PDF</button>
+        }
+    </form>
+</div>
+
+@if (!string.IsNullOrEmpty(Model.Error))
+{
+    <div class="alert alert-err">@Model.Error</div>
+}
+
+@if (Model.Resumen != null)
+{
+    if (Model.Resumen.Bancos.Count == 0)
+    {
+        <div class="alert alert-err">No hay pagos en el período seleccionado.</div>
+    }
+    else
+    {
+        var periodos = Model.Resumen.Bancos
+            .SelectMany(b => b.Periodos.Select(p => p.Periodo))
+            .Distinct().OrderByDescending(x => x).ToList();
+
+        <div class="card" style="margin-bottom:20px;">
+            <div style="font-size:12px; color:#777; margin-bottom:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.4px;">
+                Ingresos por banco — @Model.Resumen.MesElegido (últimos 3 meses)
+            </div>
+            <div class="chart-wrap no-print">
+                <canvas id="chart"></canvas>
+            </div>
+        </div>
+
+        <div class="card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Banco</th>
+                        @foreach (var p in periodos) { <th>@p</th> }
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var b in Model.Resumen.Bancos)
+                    {
+                        <tr>
+                            <td>@b.Nombre</td>
+                            @foreach (var p in periodos)
+                            {
+                                var total = b.Periodos.FirstOrDefault(x => x.Periodo == p)?.Total ?? 0;
+                                <td>Q. @total.ToString("F2")</td>
+                            }
+                            <td style="font-weight:700;">Q. @b.Periodos.Sum(x => x.Total).ToString("F2")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+}
+
+@section Scripts {
+    @if (Model.Resumen != null && Model.Resumen.Bancos.Count > 0)
+    {
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+        <script>
+        (function () {
+            var d = @Html.Raw(Model.ChartDataJson);
+            new Chart(document.getElementById('chart').getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: d.bancos.map(function(b){ return b.nombre; }),
+                    datasets: d.periodos.map(function(p, i){
+                        var colors = ['#222','#888','#bbb'];
+                        return {
+                            label: p,
+                            data: d.bancos.map(function(b){ return b.totales[i] || 0; }),
+                            backgroundColor: colors[i % colors.length],
+                            borderRadius: 2
+                        };
+                    })
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { font: { size: 12 }, padding: 16 } },
+                        tooltip: {
+                            callbacks: {
+                                label: function(c){ return ' Q. ' + c.parsed.y.toFixed(2); }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: { grid: { display: false } },
+                        y: {
+                            grid: { color: '#eee' },
+                            ticks: { callback: function(v){ return 'Q. ' + v; } }
+                        }
+                    }
+                }
+            });
+        })();
+        </script>
+    }
+}

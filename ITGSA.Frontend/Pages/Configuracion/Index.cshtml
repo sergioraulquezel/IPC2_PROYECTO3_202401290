@@ -1,0 +1,50 @@
+@page
+@model ITGSA.Frontend.Pages.Configuracion.IndexModel
+@{ ViewData["Title"] = "Configuración"; }
+
+<h1>Cargar configuración</h1>
+
+@if (!string.IsNullOrEmpty(Model.Error))
+{
+    <div class="alert alert-err">@Model.Error</div>
+}
+
+<div class="card">
+    <form method="post" enctype="multipart/form-data">
+        @Html.AntiForgeryToken()
+        <label>Archivo config.xml</label>
+        <div class="file-wrap" style="margin-bottom:16px;">
+            <input type="file" name="archivo" accept=".xml" />
+            <div class="file-hint">Haz clic o arrastra el archivo aquí</div>
+            <div class="file-name"></div>
+        </div>
+        <button type="submit" class="btn-dark">Cargar</button>
+    </form>
+</div>
+
+@if (Model.Respuesta != null)
+{
+    <div class="result">
+        <div class="result-header">Resultado</div>
+        <div class="result-body">
+            <div class="stats">
+                <div class="stat ok">
+                    <div class="stat-val">@Model.Respuesta.ClientesCreados</div>
+                    <div class="stat-lbl">Clientes creados</div>
+                </div>
+                <div class="stat warn">
+                    <div class="stat-val">@Model.Respuesta.ClientesActualizados</div>
+                    <div class="stat-lbl">Clientes actualizados</div>
+                </div>
+                <div class="stat ok">
+                    <div class="stat-val">@Model.Respuesta.BancosCreados</div>
+                    <div class="stat-lbl">Bancos creados</div>
+                </div>
+                <div class="stat warn">
+                    <div class="stat-val">@Model.Respuesta.BancosActualizados</div>
+                    <div class="stat-lbl">Bancos actualizados</div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

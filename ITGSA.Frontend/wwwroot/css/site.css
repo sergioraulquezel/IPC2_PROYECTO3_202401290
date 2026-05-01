@@ -1,0 +1,331 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: system-ui, sans-serif;
+    font-size: 14px;
+    background: #f5f5f5;
+    color: #222;
+    min-height: 100vh;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* NAV */
+nav {
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    padding: 0 24px;
+    height: 48px;
+}
+
+.nav-brand {
+    font-weight: 700;
+    font-size: 15px;
+    margin-right: 32px;
+    color: #111;
+}
+
+nav a {
+    display: inline-flex;
+    align-items: center;
+    height: 48px;
+    padding: 0 14px;
+    font-size: 13px;
+    color: #555;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+}
+
+nav a:hover { color: #111; }
+nav a.active { color: #111; border-bottom-color: #111; font-weight: 600; }
+
+.nav-reset {
+    margin-left: auto;
+    font-size: 12px;
+    color: #c00;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.nav-reset:hover { background: #fff0f0; }
+
+/* LAYOUT */
+.container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 32px 24px;
+}
+
+/* PAGE TITLE */
+h1 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: #111;
+}
+
+/* CARD */
+.card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* FORM */
+label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+input[type="text"],
+input[type="file"],
+select {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    background: #fff;
+    color: #222;
+    outline: none;
+}
+
+input[type="text"]:focus,
+select:focus {
+    border-color: #666;
+}
+
+/* FILE INPUT */
+.file-wrap {
+    border: 1px dashed #bbb;
+    border-radius: 4px;
+    padding: 24px;
+    text-align: center;
+    background: #fafafa;
+    cursor: pointer;
+    position: relative;
+}
+
+.file-wrap input[type="file"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+}
+
+.file-wrap:hover { border-color: #888; background: #f0f0f0; }
+
+.file-hint { font-size: 13px; color: #777; margin-bottom: 4px; }
+.file-name  { font-size: 12px; color: #333; margin-top: 8px; font-weight: 600; }
+
+/* BUTTONS */
+button, .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    background: #fff;
+    color: #222;
+    transition: background 0.15s;
+}
+
+button:hover, .btn:hover { background: #f0f0f0; }
+
+.btn-dark {
+    background: #111;
+    color: #fff;
+    border-color: #111;
+}
+
+.btn-dark:hover { background: #333; }
+
+.btn-red {
+    background: #fff;
+    color: #c00;
+    border-color: #c00;
+}
+
+.btn-red:hover { background: #fff0f0; }
+
+/* RESULT BOX */
+.result {
+    margin-top: 20px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.result-header {
+    background: #f5f5f5;
+    padding: 10px 16px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: #555;
+    border-bottom: 1px solid #ddd;
+}
+
+.result-body { padding: 16px; }
+
+/* STATS ROW */
+.stats {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.stat {
+    flex: 1;
+    min-width: 110px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 12px 14px;
+    text-align: center;
+}
+
+.stat-val {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1;
+    color: #111;
+}
+
+.stat-lbl {
+    font-size: 11px;
+    color: #777;
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.stat.ok .stat-val  { color: #1a7a40; }
+.stat.warn .stat-val{ color: #b07000; }
+.stat.err .stat-val { color: #c00; }
+
+/* ALERT */
+.alert {
+    padding: 10px 14px;
+    border-radius: 4px;
+    font-size: 13px;
+    margin-bottom: 16px;
+}
+
+.alert-ok  { background: #f0faf4; border: 1px solid #b2ddc3; color: #1a5c30; }
+.alert-err { background: #fff0f0; border: 1px solid #f5c6c2; color: #900; }
+
+/* TABLE */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+th {
+    text-align: left;
+    padding: 8px 10px;
+    background: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: #555;
+    font-weight: 700;
+}
+
+td {
+    padding: 8px 10px;
+    border-bottom: 1px solid #eee;
+    color: #222;
+}
+
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: #fafafa; }
+
+.td-red  { color: #c00; font-weight: 600; }
+.td-grn  { color: #1a7a40; font-weight: 600; }
+
+/* CLIENTE BLOCK */
+.client-block { margin-bottom: 24px; }
+
+.client-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 10px 14px;
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    border-bottom: none;
+    border-radius: 4px 4px 0 0;
+}
+
+.client-name { font-weight: 700; font-size: 14px; }
+.client-nit  { font-size: 12px; color: #777; margin-top: 1px; }
+.client-saldo{ font-size: 13px; font-weight: 700; }
+
+.client-table {
+    border: 1px solid #ddd;
+    border-radius: 0 0 4px 4px;
+    overflow: hidden;
+}
+
+/* MODAL */
+.overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+}
+
+.overlay.show { display: flex; }
+
+.modal {
+    background: #fff;
+    border-radius: 6px;
+    padding: 24px;
+    width: 340px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+
+.modal h2 { font-size: 16px; margin-bottom: 10px; }
+.modal p  { font-size: 13px; color: #555; margin-bottom: 20px; line-height: 1.6; }
+.modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
+
+/* CHART */
+.chart-wrap {
+    position: relative;
+    height: 280px;
+    margin-top: 16px;
+}
+
+/* PRINT */
+@media print {
+    nav, .no-print { display: none !important; }
+    .container { padding: 0; max-width: 100%; }
+    .card { border: none; padding: 0; }
+    body { background: #fff; }
+}

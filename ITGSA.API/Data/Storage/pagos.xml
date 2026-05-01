@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<pagos>
+  <pago>
+    <codigoBanco>1</codigoBanco>
+    <nombreBanco>Banco Industrial</nombreBanco>
+    <fecha>02/04/2026</fecha>
+    <NITCliente>D4E5F6</NITCliente>
+    <valor>50000.00</valor>
+  </pago>
+  <pago>
+    <codigoBanco>2</codigoBanco>
+    <nombreBanco>Banco Promerica</nombreBanco>
+    <fecha>05/04/2026</fecha>
+    <NITCliente>D4E5F6</NITCliente>
+    <valor>1000000.00</valor>
+  </pago>
+  <pago>
+    <codigoBanco>1</codigoBanco>
+    <nombreBanco>Banco Industrial</nombreBanco>
+    <fecha>08/04/2026</fecha>
+    <NITCliente>D4E5F6</NITCliente>
+    <valor>700000.00</valor>
+  </pago>
+  <pago>
+    <codigoBanco>3</codigoBanco>
+    <nombreBanco>Banco de Desarrollo Rural</nombreBanco>
+    <fecha>15/04/2026</fecha>
+    <NITCliente>D4E5F6</NITCliente>
+    <valor>20000.00</valor>
+  </pago>
+  <pago>
+    <codigoBanco>1</codigoBanco>
+    <nombreBanco>Banco Industrial</nombreBanco>
+    <fecha>03/04/2026</fecha>
+    <NITCliente>A1B2C3</NITCliente>
+    <valor>300000.00</valor>
+  </pago>
+  <pago>
+    <codigoBanco>2</codigoBanco>
+    <nombreBanco>Banco Promerica</nombreBanco>
+    <fecha>07/04/2026</fecha>
+    <NITCliente>A1B2C3</NITCliente>
+    <valor>8000000.00</valor>
+  </pago>
+  <pago>
+    <codigoBanco>1</codigoBanco>
+    <nombreBanco>Banco Industrial</nombreBanco>
+    <fecha>12/04/2026</fecha>
+    <NITCliente>A1B2C3</NITCliente>
+    <valor>400000.00</valor>
+  </pago>
+  <pago>
+    <codigoBanco>2</codigoBanco>
+    <nombreBanco>Banco Promerica</nombreBanco>
+    <fecha>06/04/2026</fecha>
+    <NITCliente>J1K2L3</NITCliente>
+    <valor>2000000.00</valor>
+  </pago>
+  <pago>
+    <codigoBanco>3</codigoBanco>
+    <nombreBanco>Banco de Desarrollo Rural</nombreBanco>
+    <fecha>11/04/2026</fecha>
+    <NITCliente>J1K2L3</NITCliente>
+    <valor>900000.00</valor>
+  </pago>
+</pagos>

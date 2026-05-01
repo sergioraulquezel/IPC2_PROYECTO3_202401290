@@ -1,0 +1,73 @@
+@page
+@model ITGSA.Frontend.Pages.Peticiones.EstadoCuentaModel
+@{ ViewData["Title"] = "Estado de Cuenta"; }
+
+<h1>Estado de cuenta</h1>
+
+<div class="card no-print">
+    <form method="get" style="display:flex; gap:10px; align-items:flex-end; flex-wrap:wrap;">
+        <div style="flex:1; min-width:200px;">
+            <label>NIT del cliente</label>
+            <input type="text" name="nit" value="@Model.NitConsultado"
+                   placeholder="Vacío para ver todos" />
+        </div>
+        <button type="submit" class="btn-dark">Consultar</button>
+        @if (Model.Estados.Count > 0)
+        {
+            <button type="button" class="btn" onclick="window.print()">Imprimir / PDF</button>
+        }
+    </form>
+</div>
+
+@if (!string.IsNullOrEmpty(Model.Error))
+{
+    <div class="alert alert-err">@Model.Error</div>
+}
+
+@if (Model.Buscado && Model.Estados.Count == 0 && string.IsNullOrEmpty(Model.Error))
+{
+    <div class="alert alert-err">No se encontraron clientes con ese NIT.</div>
+}
+
+@foreach (var e in Model.Estados)
+{
+    <div class="client-block">
+        <div class="client-head">
+            <div>
+                <div class="client-name">@e.Nombre</div>
+                <div class="client-nit">NIT: @e.NIT</div>
+            </div>
+            <div class="client-saldo">Saldo: Q. @e.SaldoActual.ToString("F2")</div>
+        </div>
+        <div class="client-table">
+            @if (e.Transacciones.Count == 0)
+            {
+                <div style="padding:14px 16px; color:#777; font-size:13px;">Sin transacciones.</div>
+            }
+            else
+            {
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Descripción</th>
+                            <th>Cargo</th>
+                            <th>Abono</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var t in e.Transacciones)
+                        {
+                            <tr>
+                                <td>@t.Fecha</td>
+                                <td>@t.Descripcion</td>
+                                <td class="td-red">@(t.Cargo.HasValue ? $"Q. {t.Cargo.Value:F2}" : "")</td>
+                                <td class="td-grn">@(t.Abono.HasValue ? $"Q. {t.Abono.Value:F2}" : "")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+}

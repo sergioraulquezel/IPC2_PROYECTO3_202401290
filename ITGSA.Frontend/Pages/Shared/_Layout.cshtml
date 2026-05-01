@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] — ITGSA</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+
+<nav>
+    <span class="nav-brand">ITGSA</span>
+    <a href="/Configuracion">Configuración</a>
+    <a href="/Transacciones">Transacciones</a>
+    <a href="/Peticiones/EstadoCuenta">Estado de Cuenta</a>
+    <a href="/Peticiones/Ingresos">Ingresos</a>
+    <button class="nav-reset" id="btnResetOpen">Resetear datos</button>
+</nav>
+
+<div class="container">
+    @RenderBody()
+</div>
+
+<div class="overlay" id="resetOverlay">
+    <div class="modal">
+        <h2>Resetear datos</h2>
+        <p>Se eliminarán todos los clientes, bancos, facturas y pagos. Esta acción no se puede deshacer.</p>
+        <div class="modal-actions">
+            <button id="btnResetCancel">Cancelar</button>
+            <form method="post" action="/Reset" style="display:inline;">
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btn-red">Confirmar</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/site.js" asp-append-version="true"></script>
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
